@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>造纸局 · 丢一个主题进来,出一张排好版的纸</title>
+<meta name="description" content="造纸局:本地运行的 AI 内容生成工作台。13 种产出——一页纸、长文档、小红书图文、公众号封面、带旁白字幕的状态图视频。丢主题进,成品出。">
+<style>
+  :root{
+    --ink:#1b365d; --ink-soft:#5a6b84; --paper:#f5f4ed; --card:#fffdf6;
+    --yellow:#f7d774; --pink:#f2b8b5; --green:#b7e2c1; --blue:#b9d4ef; --tan:#ecd9a8;
+    --line:rgba(27,54,93,.35);
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    background-image:linear-gradient(rgba(27,54,93,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(27,54,93,.05) 1px,transparent 1px);
+    background-size:26px 26px;
+    font-family:"Kaiti SC","STKaiti","KaiTi","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header{display:flex;justify-content:space-between;align-items:center;padding:26px 0 10px}
+  .brand{font-size:1.5rem;font-weight:700;letter-spacing:.06em}
+  .brand small{display:block;font-size:.72rem;color:var(--ink-soft);letter-spacing:.12em;font-weight:400}
+  a{color:var(--ink)}
+  .gh{font-size:.85rem;text-decoration:none;border:1.5px dashed var(--line);border-radius:10px;padding:6px 14px;background:var(--card)}
+  .gh:hover{transform:rotate(-1deg)}
+  .hero{padding:46px 0 30px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}
+  h1{font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.35;margin:.2em 0 .4em}
+  h1 .hl{background:linear-gradient(transparent 62%,var(--yellow) 62%);padding:0 .1em}
+  .sub{color:var(--ink-soft);font-size:1.05rem;max-width:30em}
+  .cta{margin:26px 0 8px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;text-decoration:none;font-size:1.02rem;font-weight:700;padding:13px 26px;border-radius:14px;border:2px solid var(--ink);transition:transform .12s}
+  .btn:hover{transform:rotate(-1.2deg) scale(1.02)}
+  .btn.p{background:var(--ink);color:#fdfaf2;box-shadow:4px 5px 0 rgba(27,54,93,.18)}
+  .btn.s{background:var(--card);color:var(--ink);box-shadow:4px 5px 0 rgba(27,54,93,.12)}
+  .note{font-size:.8rem;color:var(--ink-soft)}
+  .shot{background:var(--card);border:1.6px solid var(--line);border-radius:16px;padding:10px;box-shadow:7px 9px 0 rgba(27,54,93,.10);transform:rotate(1.4deg)}
+  .shot img{width:100%;border-radius:9px;display:block}
+  .shot .cap{font-size:.78rem;color:var(--ink-soft);text-align:center;padding:7px 4px 2px}
+  section{padding:52px 0 10px}
+  h2{font-size:1.7rem;margin:0 0 6px}
+  h2::before{content:"〇 ";color:var(--ink-soft);font-size:.8em}
+  .lead{color:var(--ink-soft);margin:0 0 30px;max-width:38em}
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .gal .shot:nth-child(1){transform:rotate(-1.6deg)} .gal .shot:nth-child(3){transform:rotate(1.8deg)}
+  .types{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .chip{background:var(--card);border:1.5px dashed var(--line);border-radius:12px;padding:11px 14px;display:flex;flex-direction:column;gap:2px;font-size:.95rem}
+  .chip b{font-weight:700} .chip i{font-style:normal;font-size:.72rem;color:var(--ink-soft)}
+  .chip:nth-child(4n+1){border-top:5px solid var(--yellow)} .chip:nth-child(4n+2){border-top:5px solid var(--pink)}
+  .chip:nth-child(4n+3){border-top:5px solid var(--green)} .chip:nth-child(4n+4){border-top:5px solid var(--blue)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .step{background:var(--card);border:1.6px solid var(--line);border-radius:16px;padding:22px 20px;box-shadow:5px 6px 0 rgba(27,54,93,.09);position:relative}
+  .step .num{position:absolute;top:-16px;left:16px;background:var(--tan);border:1.5px solid var(--line);border-radius:10px;padding:2px 12px;font-weight:700;transform:rotate(-2deg)}
+  .step h3{margin:12px 0 6px;font-size:1.08rem}
+  .step p{margin:0;font-size:.9rem;color:var(--ink-soft)}
+  .dl{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .dcard{background:var(--card);border:1.6px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:6px 7px 0 rgba(27,54,93,.09)}
+  .dcard h3{margin:0 0 10px;font-size:1.15rem}
+  .dcard ul{margin:0 0 16px;padding-left:1.3em;font-size:.9rem;color:var(--ink-soft)}
+  .dcard pre{background:#f0eee6;border-radius:10px;padding:12px 14px;font-size:.78rem;overflow:auto;font-family:ui-monospace,Menlo,Consolas,monospace}
+  footer{margin-top:60px;padding:30px 0 44px;border-top:2px dashed var(--line);font-size:.85rem;color:var(--ink-soft)}
+  .fineprint{font-size:.78rem;color:var(--ink-soft);margin-top:8px}
+  @media (max-width:860px){.hero{grid-template-columns:1fr}.gal,.steps,.dl{grid-template-columns:1fr}.shot{transform:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">造纸局<small>ZAOZHIJU WORKBENCH</small></div>
+  <a class="gh" href="https://github.com/young920/kami">GitHub 仓库 ↗</a>
+</header>
+
+<div class="hero">
+  <div>
+    <h1>丢一个主题进来,<br>出一张<span class="hl">排好版的纸</span>。</h1>
+    <p class="sub">造纸局是一台跑在你自己电脑上的内容生成工作台:选好产出类型、贴上素材,后台 AI 引擎自动写稿、排版、配音、渲染——完成弹提醒,成品直接下载。PDF、网页、组图、带字幕的 MP4,13 种格式,全程不用打开任何设计软件。</p>
+    <div class="cta">
+      <a class="btn p" href="https://github.com/young920/kami/releases/latest">下载 Windows 安装包</a>
+      <a class="btn s" href="#install">Mac 部署方式</a>
+    </div>
+    <p class="note">需已安装并登录 Claude Code 命令行(生成引擎走你自己的账号)。数据全部留在本机,不出门。</p>
+  </div>
+  <div class="shot">
+    <img src="docs/screenshots/01-caiqian-home.png" alt="造纸局彩铅风首页" loading="eager">
+    <div class="cap">发单界面:左边挑纸型,右边丢主题</div>
+  </div>
+</div>
+
+<section>
+  <h2>13 种产出</h2>
+  <p class="lead">文档类走 kami 排版引擎,图文卡走 guizang 社交卡引擎,视频走 sweety 状态图引擎——全部内置,一次安装全解锁。</p>
+  <div class="types">
+    <div class="chip"><b>一页纸</b><i>≈10 分</i></div>
+    <div class="chip"><b>长文档</b><i>≈30 分</i></div>
+    <div class="chip"><b>信件</b><i>≈9 分</i></div>
+    <div class="chip"><b>作品集</b><i>≈18 分</i></div>
+    <div class="chip"><b>简历</b><i>≈15 分</i></div>
+    <div class="chip"><b>演示文稿</b><i>≈14 分</i></div>
+    <div class="chip"><b>财报点评</b><i>≈8 分</i></div>
+    <div class="chip"><b>更新日志</b><i>≈7 分</i></div>
+    <div class="chip"><b>落地页</b><i>≈13 分</i></div>
+    <div class="chip"><b>艺术流程图</b><i>≈14 分</i></div>
+    <div class="chip"><b>蜡笔状态图视频</b><i>≈60 分 · 带旁白字幕</i></div>
+    <div class="chip"><b>小红书图文</b><i>≈25 分 · 5-8 张竖版卡</i></div>
+    <div class="chip"><b>公众号封面</b><i>≈15 分 · 双图</i></div>
+  </div>
+</section>
+
+<section>
+  <h2>界面两套风格,一键互切</h2>
+  <p class="lead">彩铅风手绘轻盈,墨纸风纸纹沉浸——同一套后端,两种手感,右上角一键切换并记住你的偏好。</p>
+  <div class="gal">
+    <div class="shot"><img src="docs/screenshots/01-caiqian-home.png" alt="彩铅风" loading="lazy"><div class="cap">彩铅风 · Inkra 手绘组件库</div></div>
+    <div class="shot"><img src="docs/screenshots/02-mozhi-home.png" alt="墨纸风" loading="lazy"><div class="cap">墨纸风 · 真实纸纹 + 便利贴墙</div></div>
+    <div class="shot"><img src="docs/screenshots/03-tasks.png" alt="任务页" loading="lazy"><div class="cap">任务页 · 排队自动跑,成品就地下载</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>怎么干活</h2>
+  <div class="steps">
+    <div class="step"><span class="num">1</span><h3>丢主题</h3><p>选一种产出类型,贴上正文 / 链接 / 素材(也可以只写一句主题,引擎自己查资料)。</p></div>
+    <div class="step"><span class="num">2</span><h3>后台自己跑</h3><p>写稿 → 排版 → 两轮渲染自检 → 配音渲染,并行 2 单排队,你可以关掉窗口去干别的。</p></div>
+    <div class="step"><span class="num">3</span><h3>弹提醒收纸</h3><p>完成桌面弹窗,点开就是成品:PDF / HTML / 组图 ZIP / MP4,直接下载发布。</p></div>
+  </div>
+</section>
+
+<section id="install">
+  <h2>装机</h2>
+  <div class="dl">
+    <div class="dcard">
+      <h3>Windows · 双击装机</h3>
+      <ul><li>下载 47MB 安装包,解压双击 <b>造纸局.exe</b></li><li>首次启动弹「装机确认」,点『是』自动补齐全部依赖(需联网,10-20 分钟)</li><li>之后每次双击直接进界面</li></ul>
+      <a class="btn p" href="https://github.com/young920/kami/releases/latest">下载 zaozhiju-win.zip</a>
+    </div>
+    <div class="dcard">
+      <h3>Mac · 三条命令</h3>
+      <ul><li>前置:Claude Code 已登录;视频类需 python3 + ffmpeg</li><li>装完 <b>造纸局.app</b> 拖 Dock 即用,服务自动拉起</li></ul>
+      <pre>git clone https://github.com/young920/kami
+cd kami/workbench && bash setup-mac.sh
+npm start</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  造纸局 — 一个人的出版社。本地运行 · 数据不出门 · 开源引擎可追溯。
+  <div class="fineprint">生成质量依赖 Claude 模型能力;界面截图均来自真实运行环境。GitHub: <a href="https://github.com/young920/kami">young920/kami</a></div>
+</footer>
+
+</div>
+</body>
+</html>
