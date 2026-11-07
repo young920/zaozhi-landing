@@ -1,0 +1,5 @@
+{
+  "version": "0.2.1",
+  "notes": "新增「设置」页(环境体检/Pexels 配图钥匙/检查更新);首次启动一键装机引导;失败任务可一键重试;桌面客户端记住窗口大小和位置;修复 Mac 版打开即崩溃的问题",
+  "url": "https://github.com/young920/kami/releases/tag/v0.2"
+}
