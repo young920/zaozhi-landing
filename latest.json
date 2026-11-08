@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
-  "notes": "新增「设置」页(环境体检/Pexels 配图钥匙/检查更新);首次启动一键装机引导;失败任务可一键重试;桌面客户端记住窗口大小和位置;修复 Mac 版打开即崩溃的问题",
-  "url": "https://github.com/young920/kami/releases/tag/v0.2"
+  "version": "0.3.0",
+  "notes": "开机常驻一键开关;同时出单数1-4可调即时生效;失败任务说人话直接给下一步;设置页生成诊断包(不含钥匙);首次装机启动页实时进度;成品一键备份到下载;修复窗口记忆恢复",
+  "url": "https://github.com/young920/kami/releases/tag/v0.3"
 }
