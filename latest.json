@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
-  "notes": "13项能力:视频可选画幅时长+发文物料一键开+系统通知;卡片版式逐页变化/配图防裁脸;文档素材保真/自动嵌图表/链接提取品牌色;装机弹窗只问一次(设置页可重开);无brew的Mac不再反复弹窗",
-  "url": "https://github.com/young920/kami/releases/tag/v0.4"
+  "version": "0.4.1",
+  "notes": "新增第15种输出Word文档+小红书发帖文案+全类型质检单;Pexels钥匙设置页可当场验真;装机自动补齐Word/PPT产线依赖(pandoc/文档渲染库/放映软件,Mac与Windows双端);备份补上PPT成品与质检单",
+  "url": "https://young920.github.io/zaozhi-landing/#install"
 }
