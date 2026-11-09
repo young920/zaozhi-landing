@@ -1,5 +1,5 @@
 {
-  "version": "0.4.1",
-  "notes": "新增第15种输出Word文档+小红书发帖文案+全类型质检单;Pexels钥匙设置页可当场验真;装机自动补齐Word/PPT产线依赖(pandoc/文档渲染库/放映软件,Mac与Windows双端);备份补上PPT成品与质检单",
+  "version": "0.4.2",
+  "notes": "设置页新增一键升级(下好新包点一下自动换新并重开);缺依赖导致的失败卡片上加「一键补依赖」按钮;开始创作页可把长选题存成模板一键回填;修复升级时旧服务不退出导致换版失败的 bug",
   "url": "https://young920.github.io/zaozhi-landing/#install"
 }
