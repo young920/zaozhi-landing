@@ -1,5 +1,5 @@
 {
-  "version": "0.4.3",
-  "notes": "升级加护栏(有单在跑先提醒再确认)；选题模板存全套设置一键回填；一键补依赖进度在设置页可见；升级下载显示百分比；备份含选题模板",
+  "version": "0.5.0",
+  "notes": "新增「架构图」类型：给 GitHub 仓库/技术文章/PDF，产出可交互 HTML + 2 倍高清 PNG，8 种画风可选",
   "url": "https://young920.github.io/zaozhi-landing/#install"
 }
