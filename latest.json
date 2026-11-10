@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
-  "notes": "新增「架构图」类型：给 GitHub 仓库/技术文章/PDF，产出可交互 HTML + 2 倍高清 PNG，8 种画风可选",
+  "version": "0.5.1",
+  "notes": "修复升级生效确认(端口被占会明确提示,不再重复下载)；Mac 升级保留任务历史与成品",
   "url": "https://young920.github.io/zaozhi-landing/#install"
 }
